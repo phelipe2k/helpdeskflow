@@ -1,79 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Ticket - HelpDeskFlow</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">HelpDeskFlow</a>
-            <div class="navbar-nav">
-                <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
-                <a class="nav-link" href="{{ route('tickets.index') }}">Tickets</a>
-            </div>
-            <div class="navbar-nav ms-auto">
-                <span class="navbar-text me-3">Welcome, {{ auth()->user()->name }}</span>
-                <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                    @csrf
-                    <button type="submit" class="btn btn-outline-light">Logout</button>
-                </form>
-            </div>
+@extends('layouts.app')
+
+@section('title', 'Editar Chamado #' . $ticket->id . ' - HelpDeskFlow')
+
+@section('header')
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        Editar Chamado #{{ $ticket->id }}
+    </h2>
+@endsection
+
+@section('content')
+    <div class="max-w-3xl mx-auto">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+            <form method="POST" action="{{ route('tickets.update', $ticket) }}" class="p-6 space-y-6">
+                @csrf
+                @method('PUT')
+
+                <!-- Title -->
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Título <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="title" name="title" value="{{ old('title', $ticket->title) }}" required
+                           class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white @error('title') border-red-500 @enderror">
+                    @error('title')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Descrição <span class="text-red-500">*</span>
+                    </label>
+                    <textarea id="description" name="description" rows="6" required
+                              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white @error('description') border-red-500 @enderror">{{ old('description', $ticket->description) }}</textarea>
+                    @error('description')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Status -->
+                <div>
+                    <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Status
+                    </label>
+                    <select id="status" name="status"
+                            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
+                        <option value="open" {{ $ticket->status == 'open' ? 'selected' : '' }}>Aberto</option>
+                        <option value="in_progress" {{ $ticket->status == 'in_progress' ? 'selected' : '' }}>Em Andamento</option>
+                        <option value="waiting" {{ $ticket->status == 'waiting' ? 'selected' : '' }}>Aguardando</option>
+                        <option value="resolved" {{ $ticket->status == 'resolved' ? 'selected' : '' }}>Resolvido</option>
+                        <option value="closed" {{ $ticket->status == 'closed' ? 'selected' : '' }}>Fechado</option>
+                    </select>
+                </div>
+
+                <!-- Priority -->
+                <div>
+                    <label for="priority" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Prioridade
+                    </label>
+                    <select id="priority" name="priority"
+                            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
+                        <option value="low" {{ $ticket->priority == 'low' ? 'selected' : '' }}>Baixa</option>
+                        <option value="medium" {{ $ticket->priority == 'medium' ? 'selected' : '' }}>Média</option>
+                        <option value="high" {{ $ticket->priority == 'high' ? 'selected' : '' }}>Alta</option>
+                        <option value="urgent" {{ $ticket->priority == 'urgent' ? 'selected' : '' }}>Urgente</option>
+                    </select>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <button type="submit" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Salvar Alterações
+                    </button>
+                    <a href="{{ route('tickets.show', $ticket) }}" class="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        Cancelar
+                    </a>
+                </div>
+            </form>
         </div>
-    </nav>
-    <div class="container mt-4">
-        <h1>Edit Ticket</h1>
-        <form method="POST" action="{{ route('tickets.update', $ticket) }}">
-            @csrf
-            @method('PUT')
-            <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title" name="title" value="{{ $ticket->title }}" required>
-            </div>
-            <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="4" required>{{ $ticket->description }}</textarea>
-            </div>
-            <div class="mb-3">
-                <label for="priority" class="form-label">Priority</label>
-                <select class="form-control" id="priority" name="priority" required>
-                    <option value="baixa" {{ $ticket->priority == 'baixa' ? 'selected' : '' }}>Baixa</option>
-                    <option value="média" {{ $ticket->priority == 'média' ? 'selected' : '' }}>Média</option>
-                    <option value="alta" {{ $ticket->priority == 'alta' ? 'selected' : '' }}>Alta</option>
-                    <option value="urgente" {{ $ticket->priority == 'urgente' ? 'selected' : '' }}>Urgente</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="status" class="form-label">Status</label>
-                <select class="form-control" id="status" name="status" required>
-                    <option value="aberto" {{ $ticket->status == 'aberto' ? 'selected' : '' }}>Aberto</option>
-                    <option value="em atendimento" {{ $ticket->status == 'em atendimento' ? 'selected' : '' }}>Em Atendimento</option>
-                    <option value="aguardando resposta" {{ $ticket->status == 'aguardando resposta' ? 'selected' : '' }}>Aguardando Resposta</option>
-                    <option value="resolvido" {{ $ticket->status == 'resolvido' ? 'selected' : '' }}>Resolvido</option>
-                    <option value="cancelado" {{ $ticket->status == 'cancelado' ? 'selected' : '' }}>Cancelado</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="category_id" class="form-label">Category</label>
-                <select class="form-control" id="category_id" name="category_id" required>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}" {{ $ticket->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="assignee_id" class="form-label">Assignee</label>
-                <select class="form-control" id="assignee_id" name="assignee_id">
-                    <option value="">Unassigned</option>
-                    @foreach($users as $user)
-                        <option value="{{ $user->id }}" {{ $ticket->assignee_id == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
     </div>
-</body>
-</html>
+@endsection

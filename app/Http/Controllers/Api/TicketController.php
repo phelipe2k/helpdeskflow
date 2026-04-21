@@ -7,6 +7,7 @@ use App\Models\TicketHistory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
@@ -38,13 +39,13 @@ class TicketController extends Controller
             'category_id' => 'required|exists:categories,id',
         ]);
 
-        $ticket = Ticket::create([
+        $ticket =         Ticket::create([
             'title' => $request->title,
             'description' => $request->description,
             'priority' => $request->priority,
-            'status' => 'aberto',
+            'status' => 'open',
             'category_id' => $request->category_id,
-            'requester_id' => auth()->id(),
+            'requester_id' => Auth::id(),
         ]);
 
         return response()->json($ticket, 201);
@@ -74,7 +75,7 @@ class TicketController extends Controller
         if ($oldStatus != $request->status) {
             TicketHistory::create([
                 'ticket_id' => $ticket->id,
-                'user_id' => auth()->id(),
+                'user_id' => Auth::id(),
                 'action' => 'status_change',
                 'old_value' => $oldStatus,
                 'new_value' => $request->status,
@@ -84,7 +85,7 @@ class TicketController extends Controller
         if ($oldAssignee != $request->assignee_id) {
             TicketHistory::create([
                 'ticket_id' => $ticket->id,
-                'user_id' => auth()->id(),
+                'user_id' => Auth::id(),
                 'action' => 'assignment',
                 'old_value' => $oldAssignee ? User::find($oldAssignee)->name : 'Unassigned',
                 'new_value' => $request->assignee_id ? User::find($request->assignee_id)->name : 'Unassigned',
@@ -116,7 +117,7 @@ class TicketController extends Controller
         if ($oldStatus != $request->status) {
             TicketHistory::create([
                 'ticket_id' => $ticket->id,
-                'user_id' => auth()->id(),
+                'user_id' => Auth::id(),
                 'action' => 'status_change',
                 'old_value' => $oldStatus,
                 'new_value' => $request->status,
@@ -142,7 +143,7 @@ class TicketController extends Controller
         if ($oldAssignee != $request->assignee_id) {
             TicketHistory::create([
                 'ticket_id' => $ticket->id,
-                'user_id' => auth()->id(),
+                'user_id' => Auth::id(),
                 'action' => 'assignment',
                 'old_value' => $oldAssignee ? User::find($oldAssignee)->name : 'Unassigned',
                 'new_value' => $request->assignee_id ? User::find($request->assignee_id)->name : 'Unassigned',
@@ -177,7 +178,7 @@ class TicketController extends Controller
         ]);
 
         $comment = $ticket->comments()->create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'content' => $request->content,
         ]);
 

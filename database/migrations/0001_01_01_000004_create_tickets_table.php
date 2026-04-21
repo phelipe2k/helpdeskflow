@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->enum('priority', ['baixa', 'média', 'alta', 'urgente']);
-            $table->enum('status', ['aberto', 'em atendimento', 'aguardando resposta', 'resolvido', 'cancelado']);
-            $table->foreignId('category_id')->constrained('categories');
-            $table->foreignId('requester_id')->constrained('users');
+            $table->enum('priority', ['low', 'medium', 'high', 'urgent']);
+            $table->enum('status', ['open', 'in_progress', 'waiting', 'resolved', 'closed']);
+            $table->foreignId('category_id')->nullable()->constrained('categories');
+            $table->foreignId('requester_id')->nullable()->constrained('users');
             $table->foreignId('assignee_id')->nullable()->constrained('users');
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->timestamps();
             $table->timestamp('closed_at')->nullable();
         });

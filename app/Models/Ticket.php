@@ -4,6 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Category;
+use App\Models\User;
+use App\Models\TicketComment;
+use App\Models\TicketHistory;
+use App\Models\Attachment;
 
 class Ticket extends Model
 {
@@ -12,8 +17,9 @@ class Ticket extends Model
     protected $fillable = [
         'title',
         'description',
-        'priority',
         'status',
+        'priority',
+        'user_id',
         'category_id',
         'requester_id',
         'assignee_id',
@@ -24,6 +30,8 @@ class Ticket extends Model
     {
         return [
             'closed_at' => 'datetime',
+            'priority' => 'string',
+            'status' => 'string',
         ];
     }
 
