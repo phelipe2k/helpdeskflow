@@ -12,14 +12,17 @@
 
 HelpDeskFlow é um sistema de atendimento desenvolvido **com padrões profissionais** para demonstrar exatamente o que empresas buscam em um desenvolvedor júnior. Não é só um CRUD - é um projeto completo com arquitetura em camadas, controle de acesso, validação rigorosa e fluxo de trabalho real.
 
+💡 **Por que esse projeto se destaca no portfólio:**
+> Esse sistema não é apenas um exercício. Ele simula um ambiente real de trabalho, com as mesmas regras e estrutura que você encontraria em empresas.
+
 ✅ **O que esse projeto demonstra:**
-- Organização de código e separação de responsabilidades
-- Autenticação e autorização granular
-- Relacionamentos entre tabelas
-- Validação de dados no servidor
-- Tratamento de regras de negócio
-- API REST padrão
-- Boas práticas de versionamento
+- ✅ Organização de código e separação de responsabilidades
+- ✅ Autenticação e autorização granular
+- ✅ Relacionamentos entre tabelas
+- ✅ Validação de dados no servidor
+- ✅ Tratamento de regras de negócio
+- ✅ API REST padrão
+- ✅ Boas práticas de versionamento
 
 ---
 
@@ -124,14 +127,17 @@ php artisan serve
 
 HelpDeskFlow is a complete helpdesk system built **with professional standards** to demonstrate exactly what companies look for in a junior developer. It's not just another CRUD - it's a full project with layered architecture, access control, strict validation and real workflow.
 
+💡 **Why this project stands out in your portfolio:**
+> This system is not just an exercise. It simulates a real work environment, with the same rules and structure you would find in companies.
+
 ✅ **What this project demonstrates:**
-- Code organization and separation of concerns
-- Authentication and granular authorization
-- Database relationships
-- Server-side data validation
-- Business rules implementation
-- Standard REST API
-- Good versioning practices
+- ✅ Code organization and separation of concerns
+- ✅ Authentication and granular authorization
+- ✅ Database relationships
+- ✅ Server-side data validation
+- ✅ Business rules implementation
+- ✅ Standard REST API
+- ✅ Good versioning practices
 
 ---
 
