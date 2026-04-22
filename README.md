@@ -10,19 +10,18 @@
 
 ## 📖 Sobre o Projeto
 
-HelpDeskFlow é um sistema de atendimento desenvolvido **com padrões profissionais** para demonstrar exatamente o que empresas buscam em um desenvolvedor júnior. Não é só um CRUD - é um projeto completo com arquitetura em camadas, controle de acesso, validação rigorosa e fluxo de trabalho real.
+HelpDeskFlow é um sistema completo de atendimento e gerenciamento de chamados, desenvolvido com padrões profissionais e arquitetura moderna.
 
-💡 **Por que esse projeto se destaca no portfólio:**
-> Esse sistema não é apenas um exercício. Ele simula um ambiente real de trabalho, com as mesmas regras e estrutura que você encontraria em empresas.
+É um projeto funcional completo, não apenas um exercício acadêmico. Implementa um fluxo real de atendimento com controle de perfis, histórico completo de ações e métricas operacionais.
 
-✅ **O que esse projeto demonstra:**
-- ✅ Organização de código e separação de responsabilidades
-- ✅ Autenticação e autorização granular
-- ✅ Relacionamentos entre tabelas
-- ✅ Validação de dados no servidor
-- ✅ Tratamento de regras de negócio
-- ✅ API REST padrão
-- ✅ Boas práticas de versionamento
+✅ **Características técnicas:**
+- Arquitetura em camadas com separação de responsabilidades
+- Sistema de autenticação e autorização granular
+- Relacionamentos de banco de dados bem definidos
+- Validação rigorosa de todos os dados de entrada
+- Implementação completa de regras de negócio
+- API REST padrão e bem documentada
+- Segue todas as boas práticas de desenvolvimento
 
 ---
 
@@ -125,19 +124,18 @@ php artisan serve
 
 ## 📖 About the Project
 
-HelpDeskFlow is a complete helpdesk system built **with professional standards** to demonstrate exactly what companies look for in a junior developer. It's not just another CRUD - it's a full project with layered architecture, access control, strict validation and real workflow.
+HelpDeskFlow is a complete ticketing and helpdesk management system, built with professional standards and modern architecture.
 
-💡 **Why this project stands out in your portfolio:**
-> This system is not just an exercise. It simulates a real work environment, with the same rules and structure you would find in companies.
+It is a fully functional production-ready project, not just an academic exercise. Implements a real support workflow with role-based access control, complete action history and operational metrics.
 
-✅ **What this project demonstrates:**
-- ✅ Code organization and separation of concerns
-- ✅ Authentication and granular authorization
-- ✅ Database relationships
-- ✅ Server-side data validation
-- ✅ Business rules implementation
-- ✅ Standard REST API
-- ✅ Good versioning practices
+✅ **Technical features:**
+- Layered architecture with separation of concerns
+- Granular authentication and authorization system
+- Well defined database relationships
+- Strict validation of all incoming data
+- Complete business rules implementation
+- Standard and well documented REST API
+- Follows all best development practices
 
 ---
 
